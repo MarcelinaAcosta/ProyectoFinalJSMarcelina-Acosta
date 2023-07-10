@@ -1,0 +1,16 @@
+body {
+    background-color: cadetblue;
+}
+main{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    
+}
+#TextMain {
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+    margin-top: 30vh;
+}
