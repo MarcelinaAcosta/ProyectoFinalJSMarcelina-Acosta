@@ -69,7 +69,7 @@ function actualizarListadoEnPantalla() { // funcion que imprime en el html la li
         // 
         let html = "";
         TarjetaListadoParse.forEach(function (card, index) {
-            html += 'verbo en infinitivo: '+ card.verbo + '<br>' + 'Past simple: ' + card.past + '<br>' + 'presente perfecto: ' + card.participle + '<br>' + `<button onclick="eliminarCard(${index})">"Eliminar flashcard"</button><br>`;
+            html += '<div class="card_container"><div class="first-content"><span>' + card.verbo + '</span></div><div class="second-content"><span>Past simple:' + card.past + '<br>' + 'present perfect:' + card.participle + '</span></div>' + `<button onclick="eliminarCard(${index})">"Eliminar flashcard"</button>` + '</div>' ;
         });
         document.getElementById("card").innerHTML = html;
 
@@ -84,26 +84,43 @@ function actualizarListadoEnPantalla() { // funcion que imprime en el html la li
     
     actualizarListadoEnPantalla();
 
-function rondaDeFlashCards(indice) { // funcion para mostrar objeto 1 por 1
-    let flashCardEnPantalla = TarjetasListado[indice];
+    
+
+    let indiceActualFlashCard = 0;
+
+    function rondaDeFlashCards(indice) { // funcion para mostrar objeto 1 por 1
+    let flashCardEnPantalla = TarjetaListadoParse[indice];
     let htmlFlashCard = 'verbo : ' + flashCardEnPantalla.verbo + 'past simple :' + flashCardEnPantalla.past + 'present perfect :' + flashCardEnPantalla.participle; 
     // console.log(flashCardEnPantalla)
     document.getElementById("rondaDeFlashCards").innerHTML = htmlFlashCard;
     
 }
-let indiceActualFlashCard = 0;
+
+    function mostrarSiguienteFlashCard() {
+        indiceActualFlashCard++
+    if(indiceActualFlashCard < TarjetaListadoParse.length){
+        rondaDeFlashCards(indiceActualFlashCard);
+    }
+    else{
+        htmlFlashCard2 = ' llegaste al final de la ronda !'
+        document.getElementById("rondaDeFlashCards").innerHTML = htmlFlashCard2;
+    }
+    }
+
 
 rondaDeFlashCards(indiceActualFlashCard);
 
 let btnSiguienteFlashCard = document.getElementById("mostrarSiguienteFlashCard");
 
 btnSiguienteFlashCard.addEventListener('click', () => { // evento creado para pasar de tarjeta a tarjeta mediante un boton 
-    indiceActualFlashCard++
-    if(indiceActualFlashCard < TarjetasListado.length){
-        rondaDeFlashCards(indiceActualFlashCard);
-    }
-    else{
-        htmlFlashCard2 += ' llegaste al final de la ronda !'
-        document.getElementById("rondaDeFlashCards").innerHTML = htmlFlashCard2;
-    }
+    mostrarSiguienteFlashCard();
+    
 });
+
+let comenzarRondaOtraVez = document.getElementById("comenzarRondaOtraVez");
+comenzarRondaOtraVez.addEventListener('click', () => {
+    indiceActualFlashCard = 0;
+    mostrarSiguienteFlashCard();
+    
+});
+    
