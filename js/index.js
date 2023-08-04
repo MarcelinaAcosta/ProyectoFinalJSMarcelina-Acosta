@@ -1,6 +1,5 @@
 let buttonPlusCard = document.getElementById('buttonPlusCard');
 let buttonOcultarMostrarListado = document.getElementById('OcultarMostrarListado');
-// let eliminarFlashCard = document.getElementById('eliminarFlashcard');
 
 let TarjetaListadoParse = JSON.parse(localStorage.getItem('listadosDeCards'));
 
@@ -85,6 +84,16 @@ function actualizarListadoEnPantalla() { // funcion que imprime en el html la li
     actualizarListadoEnPantalla();
 
     
+// -------------- RONDA DE FLASHCARDS -------------------------------------------
+// ------------------------------------------------------------------------------
+    const inicioDeRonda = document.getElementById("inicioDeRonda");
+    let rondaDeFlashcardsContainer = document.getElementById("rondaDeFlashCards_container");
+    let btnSiguienteFlashCard = document.getElementById("mostrarSiguienteFlashCard");
+    let comenzarRondaOtraVez = document.getElementById("comenzarRondaOtraVez");
+
+    inicioDeRonda.addEventListener('click', () => {
+        rondaDeFlashcardsContainer.style.display = rondaDeFlashcardsContainer.style.display === 'none' ? 'block' : 'none';
+    })
 
     let indiceActualFlashCard = 0;
 
@@ -94,7 +103,8 @@ function actualizarListadoEnPantalla() { // funcion que imprime en el html la li
     // console.log(flashCardEnPantalla)
     document.getElementById("rondaDeFlashCards").innerHTML = htmlFlashCard;
     
-}
+    }
+    rondaDeFlashCards(indiceActualFlashCard);
 
     function mostrarSiguienteFlashCard() {
         indiceActualFlashCard++
@@ -107,20 +117,14 @@ function actualizarListadoEnPantalla() { // funcion que imprime en el html la li
     }
     }
 
-
-rondaDeFlashCards(indiceActualFlashCard);
-
-let btnSiguienteFlashCard = document.getElementById("mostrarSiguienteFlashCard");
-
-btnSiguienteFlashCard.addEventListener('click', () => { // evento creado para pasar de tarjeta a tarjeta mediante un boton 
-    mostrarSiguienteFlashCard();
+    btnSiguienteFlashCard.addEventListener('click', () => { // evento creado para pasar de tarjeta a tarjeta mediante un boton 
+        mostrarSiguienteFlashCard();
     
-});
+    });
 
-let comenzarRondaOtraVez = document.getElementById("comenzarRondaOtraVez");
-comenzarRondaOtraVez.addEventListener('click', () => {
-    indiceActualFlashCard = 0;
-    mostrarSiguienteFlashCard();
+    comenzarRondaOtraVez.addEventListener('click', () => {
+        indiceActualFlashCard = 0;
+        mostrarSiguienteFlashCard();
     
-});
+    });
     
