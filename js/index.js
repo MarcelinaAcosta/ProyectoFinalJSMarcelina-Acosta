@@ -105,7 +105,7 @@ function actualizarListadoEnPantalla() { // funcion que imprime en el html la li
 
     function rondaDeFlashCards(indice) { // funcion para mostrar objeto 1 por 1
     let flashCardEnPantalla = TarjetaListadoParse[indice];
-    let htmlFlashCard = 'verbo : ' + flashCardEnPantalla.verbo + 'past simple :' + flashCardEnPantalla.past + 'present perfect :' + flashCardEnPantalla.participle; 
+    let htmlFlashCard = '<div class="card_containerSection"><div class="first-contentSection"><span>' + flashCardEnPantalla.verbo + '</span></div><div class="second-contentSection"><span>Past simple:' + flashCardEnPantalla.past + '<br>' + 'present perfect:' + flashCardEnPantalla.participle+ '</span></div></div>'; 
     // console.log(flashCardEnPantalla)
     document.getElementById("rondaDeFlashCards").innerHTML = htmlFlashCard;
     
