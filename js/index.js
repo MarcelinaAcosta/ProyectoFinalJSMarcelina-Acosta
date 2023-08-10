@@ -68,7 +68,7 @@ function actualizarListadoEnPantalla() { // funcion que imprime en el html la li
         // 
         let html = "";
         TarjetaListadoParse.forEach(function (card, index) {
-            html += '<div class="card_container"><div class="first-content"><span>' + card.verbo + '</span></div><div class="second-content"><span>Past simple:' + card.past + '<br>' + 'present perfect:' + card.participle + '</span></div>' + `<button onclick="eliminarCard(${index})">"Eliminar flashcard"</button>` + '</div>' ;
+            html += '<div class="card_container"><div class="first-content"><span>' + card.verbo + '</span></div><div class="second-content"><span>Past simple:' + card.past + '<br>' + 'present perfect:' + card.participle + '</span></div>' + `<button id="bttnEliminarCard" onclick="eliminarCard(${index})">X</button>` + '</div>' ;
         });
         document.getElementById("card").innerHTML = html;
 
@@ -78,7 +78,7 @@ function actualizarListadoEnPantalla() { // funcion que imprime en el html la li
     buttonOcultarMostrarListado.addEventListener('click', () => {
         let ListadosDeArray = document.getElementById('card');
         // Alterna la visibilidad del elemento con id "card"
-        ListadosDeArray.style.display = ListadosDeArray.style.display === 'none' ? 'block' : 'none';
+        ListadosDeArray.style.display = ListadosDeArray.style.display === 'none' ? 'flex' : 'none';
     });
     
     actualizarListadoEnPantalla();
@@ -86,14 +86,20 @@ function actualizarListadoEnPantalla() { // funcion que imprime en el html la li
     
 // -------------- RONDA DE FLASHCARDS -------------------------------------------
 // ------------------------------------------------------------------------------
-    const inicioDeRonda = document.getElementById("inicioDeRonda");
+    let inicioDeRonda = document.getElementById("inicioDeRonda");
     let rondaDeFlashcardsContainer = document.getElementById("rondaDeFlashCards_container");
     let btnSiguienteFlashCard = document.getElementById("mostrarSiguienteFlashCard");
     let comenzarRondaOtraVez = document.getElementById("comenzarRondaOtraVez");
+    let cerrarVentana = document.getElementById("cerrarVentana");
+
 
     inicioDeRonda.addEventListener('click', () => {
         rondaDeFlashcardsContainer.style.display = rondaDeFlashcardsContainer.style.display === 'none' ? 'block' : 'none';
     })
+    cerrarVentana.addEventListener('click', () =>{
+        rondaDeFlashcardsContainer.style.display = rondaDeFlashcardsContainer.style.display === 'block' ? 'none' : 'block';
+    })
+    
 
     let indiceActualFlashCard = 0;
 
